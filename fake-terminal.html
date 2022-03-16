@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="terminal.css">
-  
+
 <template>
   <div id="terminal">
     <p>Type 'help' to get started.</p>
@@ -15,8 +15,8 @@
   (function() {
 
     var elemPrototype = Object.create(HTMLElement.prototype);
-    Object.defineProperty(elemPrototype, "commands", { 
-      get: function() { return this.terminal.commands; }, 
+    Object.defineProperty(elemPrototype, "commands", {
+      get: function() { return this.terminal.commands; },
       set: function(newCommands) { this.terminal.commands = newCommands; }
     });
 
@@ -27,12 +27,12 @@
 
       this.root.appendChild(node);
     };
-    
+
     elemPrototype.attachedCallback = function() {
         this.terminal        = Terminal.init(this.root.getElementById("terminal"), {});
         this.terminal.prompt = this.root.querySelector("content").getDistributedNodes()[0].textContent;
     };
-    
+
     elemPrototype.attributeChangedCallback = function(attrName, oldVal, newVal) {
       console.log(attrName, oldVal, newVal);
       if(attrName == "commands") { this.terminal.commands = newVal; }
